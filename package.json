@@ -1,0 +1,81 @@
+{
+    "name": "lowcss",
+    "version": "0.28.0",
+    "description": "A low-level functional CSS toolkit",
+    "author": {
+        "name": "Josemi Juanes",
+        "email": "hello@josemi.xyz"
+    },
+    "license": "MIT",
+    "homepage": "https://low.josemi.xyz",
+    "repository": "https://github.com/jmjuanes/lowcss",
+    "bugs": "https://github.com/jmjuanes/lowcss/issues",
+    "main": "low.css",
+    "style": "low.css",
+    "sass": "low.scss",
+    "exports": {
+        ".": "./low.css",
+        "./css": "./low.css",
+        "./scss": "./low.scss",
+        "./json": "./low.json",
+        "./package.json": "./package.json"
+    },
+    "scripts": {
+        "build:bundle": "node ./scripts/bundle.js sass/_index.scss low.scss",
+        "build:css": "node ./scripts/css.js low.css",
+        "build:json": "node ./scripts/json.js low.json",
+        "prebuild:site": "rm -rf www && mkdir www",
+        "build:site": "node ./scripts/site.js && node ./scripts/playground.js build",
+        "postbuild:site": "cp low.* www/ && cp node_modules/@josemi-icons/svg/sprite.svg www/ && cp node_modules/highlight.js/styles/nord.css www/highlight.css && cp -R public/* www/",
+        "build": "yarn build:bundle && yarn build:css && yarn build:json",
+        "bundle": "yarn build:bundle",
+        "docs": "yarn run build:site",
+        "playground": "yarn serve:playground",
+        "serve": "stattic --folder ./www --port 3000",
+        "serve:playground": "node ./scripts/playground.js serve",
+        "site": "yarn build:site",
+        "pack": "zip lowcss.zip low.*"
+    },
+    "keywords": [
+        "css",
+        "css-toolkit",
+        "low-css",
+        "functional-css",
+        "css-utilities",
+        "utilities",
+        "css-classes"
+    ],
+    "files": [
+        "README.md",
+        "LICENSE",
+        "low.scss",
+        "low.css",
+        "low.json"
+    ],
+    "devDependencies": {
+        "@josemi-icons/svg": "^0.6.0",
+        "autoprefixer": "^10.4.19",
+        "codecake": "^0.4.2",
+        "csso": "^5.0.5",
+        "front-matter": "^4.0.2",
+        "highlight.js": "^11.10.0",
+        "lz-string": "^1.5.0",
+        "marked": "^13.0.1",
+        "mikel": "^0.17.1",
+        "postcss": "^8.4.38",
+        "sass": "^1.72.0",
+        "stattic": "^0.4.0"
+    },
+    "peerDependencies": {
+        "sass": ">=1.23.0"
+    },
+    "browserslist": [
+        "last 10 Chrome versions",
+        "last 4 Firefox versions",
+        "last 3 Safari versions",
+        "not Safari 12",
+        "last 4 Edge versions",
+        "not Edge <= 18",
+        "Firefox ESR"
+    ]
+}
